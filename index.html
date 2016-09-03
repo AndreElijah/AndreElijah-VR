@@ -1,101 +1,296 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-    <title>WebVR Photosphere Viewer</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes"> <!-- Fullscreen Landscape on iOS -->
-
-    <meta name="abstract" content="" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <meta name="copyright" content="" />
-    <meta name="robots" content="follow, index" />
-
-    <meta property="og:site_name" content="" />
-    <meta property="og:image:secure_url" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:title" content="WebVR Photosphere Viewer" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="" />
-
-    <script src="js/aframe.min.js"></script>
-    <script src="js/components/isvr_photosphere_menu.js"></script>
-    <script src="js/components/isvr_photosphere_menu_thumb.js"></script>
-    <script src="js/components/isvr_photosphere_menu_navigation.js"></script>
-</head>
-<body>
-
+  <head>
+    <meta charset="utf-8">
+    <title>Virtual Tour: Stamps School of Art & Design</title>
+    <meta name="description" content="A virtual tour of Stamps">
+    <script src="https://aframe.io/releases/latest/aframe.min.js"></script>
+    <script src="dist/aframe-no-click-look-controls.min.js"></script>
+  </head>
+  <body>
     <a-scene>
+		<a-sky id="FarnBedroom" src="FarnBedroom.png" visible="true"></a-sky>
+		<a-sky id="FarnDining" src="FarnDining.png" visible="false"></a-sky>
+		<a-sky id="FarnFire" src="FarnFire.png" visible="false"></a-sky>
+		<a-sky id="FarnPorch" src="FarnPorch.png" visible="false"></a-sky>
+		<a-sky id="FarnSink" src="FarnSink.png" visible="false"></a-sky>
+		<a-sky id="FarnStairs" src="FarnStairs.png" visible="false"></a-sky>
 
-        <a-assets>
-            <img src="images/FarnStairs.png" id="img-photosphere-1">
-            <img src="images/FarnStairsThumb.png" id="img-photosphere-1-thumb">
-            <img src="images/FarnPorch.png" id="img-photosphere-2">
-            <img src="images/FarnPorchThumb.png" id="img-photosphere-2-thumb">
-            <img src="images/FarnSink.png" id="img-photosphere-3">
-            <img src="images/FarnSinkThumb.png" id="img-photosphere-3-thumb">
-        </a-assets>
+      
+	    <a-entity camera="fov:80" far: 10000 near: 0.5 position="0 1.6 0" look-controls="enabled: true">
+		    <a-entity cursor="fuse: true; maxDistance: 500; timeout: 200" position="0 0 -2" geometry="primitive:ring" material="color:white;shader:flat" scale=".03 .03 .03">
+			</a-entity>
+		</a-entity>
 
 
-        <a-entity position="0 1.8 5">
-            <a-entity
-                id="camera" 
-                camera="far: 10000; fov: 80; near: 0.5;"
-                look-controls="enabled: true">
-                <a-entity
-                    cursor="fuse: false; maxDistance: 500; timeout: 3000;"
-                    id="cursor"
-                    position="0 0 -3.4"
-                    geometry="primitive: ring; radiusOuter: 0.10; radiusInner: 0.05;"
-                    material="color: red; shader: flat;"
-                    visible="false">
-                </a-entity>
-            </a-entity>
-        </a-entity>
 
-         
-        <a-entity data-current-page="1" isvr-photosphere-menu id="photosphere-menu" visible="false">
-            <a-entity isvr-photosphere-menu-navigation id="menu-arrow-up" position="0 1.5 0" visible="false">
-                <a-plane position="-0.07 0 0" rotation="0 0 -45" width="0.10" height="0.3" color="#5b00f4"></a-plane>
-                <a-plane position="0.07 0 0" rotation="0 0 45" width="0.10" height="0.3" color="#5b00f4"></a-plane>
-            </a-entity>
-                         
-            <a-image data-image-id="1" isvr-photosphere-menu-thumb class="img-photosphere-thumb" src="#img-photosphere-1-thumb" width="2" height="0.7" position="0 0.8 0">
-                <a-animation attribute="position" begin="mouseenter" from="0 0.8 0" to="0 0.8 0.5" dur="400"></a-animation>
-                <a-animation attribute="position" begin="mouseleave" from="0 0.8 0.5" to="0 0.8 0" dur="400"></a-animation>
-                <a-animation attribute="material.opacity" begin="fade" to="1"></a-animation>
-            </a-image>
-                         
-            <a-image data-image-id="2" isvr-photosphere-menu-thumb class="img-photosphere-thumb" src="#img-photosphere-2-thumb" width="2" height="0.7" position="0 0 0">
-                <a-animation attribute="position" begin="mouseenter" from="0 0 0" to="0 0 0.5" dur="400"></a-animation>
-                <a-animation attribute="position" begin="mouseleave" from="0 0 0.5" to="0 0 0" dur="400"></a-animation>
-                <a-animation attribute="material.opacity" begin="fade" to="1"></a-animation>
-            </a-image>
-                         
-            <a-image data-image-id="3" isvr-photosphere-menu-thumb class="img-photosphere-thumb" src="#img-photosphere-3-thumb" width="2" height="0.7" position="0 -0.8 0">
-                <a-animation attribute="position" begin="mouseenter" from="0 -0.8 0" to="0 -0.8 0.5" dur="400"></a-animation>
-                <a-animation attribute="position" begin="mouseleave" from="0 -0.8 0.5" to="0 -0.8 0" dur="400"></a-animation>
-                <a-animation attribute="material.opacity" begin="fade" to="1"></a-animation>
-            </a-image>
-          
-            <a-entity isvr-photosphere-menu-navigation="https://api.myjson.com/bins/25gz0" id="menu-arrow-down" position="0 -1.5 0" visible=" true ">
-                <a-plane position="-0.07 0 0" rotation="0 0 45" width="0.10" height="0.3" color="#5b00f4"></a-plane>
-                <a-plane position="0.07 0 0" rotation="0 0 -45" width="0.10" height="0.3" color="#5b00f4"></a-plane>
-            </a-entity>
-        </a-entity>
-        
-        <a-entity 
-            geometry="primitive:sphere;radius:5000;segmentsWidth:64;segmentsHeight:64"
-            material="shader:flat;color:#ffffff;fog:false; src:#img-photosphere-1 "
-            scale="-1 1 1"
-            rotation="0 -60 0" id="photosphere">
-        </a-entity>
+       <!--Stamps Logo 
+      <a-curvedimage src="stampslogo.png" radius="5.7" theta-length="36" height="1" position="0 2.6 0" opacity="0.5">
+        <a-animation attribute="rotation" from="0 10 0" to="0 25 0" begin="500" dur="1000"></a-animation>
+      </a-curvedimage>-->
+
+     
+
+      <!-- Map Hall Button -->
+      <a-entity rotation="0 0 0">
+      <a-curvedimage id="FarnBedroombutton" src="FarnBedroomThumb.png" radius="5.7" theta-length="35" height=".85" position="0 0.85 0" scale=".4 .4 .4"  opacity=".8">
+        <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	    <a-mouseenter target="#glow" opacity="1"></a-mouseenter>
+		<a-mouseleave target="#glow" opacity=".2"></a-mouseleave>
+      </a-curvedimage>
+      
+      <a-curvedimage id="glow" src="glow.png" rotation="0 1.5 0" radius="5.7" theta-length="38" height="1.1" position="0 .67 0" scale=".5 .5 .5"  opacity=".2">
+	      <a-animation attribute="rotation" from="0 1.5 0" to="0 -358.5 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	  </a-curvedimage>
+      </a-entity>
+      
+      <!-- Wood Shop Button -->
+      <a-entity rotation="0 -40 0">
+      <a-curvedimage id="FarnDiningbutton" src="FarnDiningThumb.png" radius="5.7" theta-length="35" height=".85" position="0 0.85 0" scale=".4 .4 .4"  opacity=".8">
+        <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	    <a-mouseenter target="#glow2" opacity="1"></a-mouseenter>
+		<a-mouseleave target="#glow2" opacity=".2"></a-mouseleave>
+      </a-curvedimage>
+      
+      <a-curvedimage id="glow2" src="glow.png" rotation="0 1.5 0" radius="5.7" theta-length="38" height="1.1" position="0 .67 0" scale=".5 .5 .5"  opacity=".2">
+	      <a-animation attribute="rotation" from="0 1.5 0" to="0 -358.5 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	  </a-curvedimage>
+      </a-entity>
+      
+      <!-- Painting Studio Button -->
+      <a-entity rotation="0 -80 0">
+      <a-curvedimage id="FarnFirebutton" src="FarnFireThumb.png" radius="5.7" theta-length="35" height=".85" position="0 0.85 0" scale=".4 .4 .4"  opacity=".8">
+        <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	    <a-mouseenter target="#glow3" opacity="1"></a-mouseenter>
+		<a-mouseleave target="#glow3" opacity=".2"></a-mouseleave>
+      </a-curvedimage>
+      
+      <a-curvedimage id="glow3" src="glow.png" rotation="0 1.5 0" radius="5.7" theta-length="38" height="1.1" position="0 .67 0" scale=".5 .5 .5"  opacity=".2">
+	      <a-animation attribute="rotation" from="0 1.5 0" to="0 -358.5 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	  </a-curvedimage>
+      </a-entity>
+      
+      <!-- FarnPorch Gallery Button -->
+      <a-entity rotation="0 -120 0">
+      <a-curvedimage id="FarnPorchbutton" src="FarnPorchThumb.png" radius="5.7" theta-length="35" height=".85" position="0 0.85 0" scale=".4 .4 .4"  opacity=".8">
+        <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	    <a-mouseenter target="#glow4" opacity="1"></a-mouseenter>
+		<a-mouseleave target="#glow4" opacity=".2"></a-mouseleave>
+      </a-curvedimage>
+      
+      <a-curvedimage id="glow4" src="glow.png" rotation="0 1.5 0" radius="5.7" theta-length="38" height="1.1" position="0 .67 0" scale=".5 .5 .5"  opacity=".2">
+	      <a-animation attribute="rotation" from="0 1.5 0" to="0 -358.5 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	  </a-curvedimage>
+      </a-entity>
+      
+      <!-- IP Studio Button -->
+      <a-entity rotation="0 -160 0">
+      <a-curvedimage id="FarnSinkbutton" src="FarnSinkThumb.png" radius="5.7" theta-length="35" height=".85" position="0 0.85 0" scale=".4 .4 .4"  opacity=".8">
+        <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	    <a-mouseenter target="#glow5" opacity="1"></a-mouseenter>
+		<a-mouseleave target="#glow5" opacity=".2"></a-mouseleave>
+      </a-curvedimage>
+      
+      <a-curvedimage id="glow5" src="glow.png" rotation="0 1.5 0" radius="5.7" theta-length="38" height="1.1" position="0 .67 0" scale=".5 .5 .5"  opacity=".2">
+	      <a-animation attribute="rotation" from="0 1.5 0" to="0 -358.5 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	  </a-curvedimage>
+      </a-entity>      
+      
+      <!-- FarnStairs Button -->
+      <a-entity rotation="0 -200 0">
+      <a-curvedimage id="FarnStairsbutton" src="FarnStairsThumb.png" radius="5.7" theta-length="35" height=".85" position="0 0.85 0" scale=".4 .4 .4"  opacity=".8">
+        <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	    <a-mouseenter target="#glow6" opacity="1"></a-mouseenter>
+		<a-mouseleave target="#glow6" opacity=".2"></a-mouseleave>
+      </a-curvedimage>
+      
+      <a-curvedimage id="glow6" src="glow.png" rotation="0 1.5 0" radius="5.7" theta-length="38" height="1.1" position="0 .67 0" scale=".5 .5 .5"  opacity=".2">
+	      <a-animation attribute="rotation" from="0 1.5 0" to="0 -358.5 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	  </a-curvedimage>
+      </a-entity>   
+      
+       <!--Couches Button 
+      <a-entity rotation="0 -240 0">
+      <a-curvedimage id="couchesbutton" src="couchesthumb.png" radius="5.7" theta-length="35" height=".85" position="0 0.85 0" scale=".4 .4 .4"  opacity=".8">
+        <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	    <a-mouseenter target="#glow7" opacity="1"></a-mouseenter>
+		<a-mouseleave target="#glow7" opacity=".2"></a-mouseleave>
+      </a-curvedimage>
+      
+      <a-curvedimage id="glow7" src="glow.png" rotation="0 1.5 0" radius="5.7" theta-length="38" height="1.1" position="0 .67 0" scale=".5 .5 .5"  opacity=".2">
+	      <a-animation attribute="rotation" from="0 1.5 0" to="0 -358.5 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	  </a-curvedimage>
+      </a-entity>  
+      
+      <!-- Print Studio Button -->
+      <!--<a-entity rotation="0 -280 0">
+      <a-curvedimage id="printstudbutton" src="printstudthumb.png" radius="5.7" theta-length="35" height=".85" position="0 0.85 0" scale=".4 .4 .4"  opacity=".8">
+        <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	    <a-mouseenter target="#glow8" opacity="1"></a-mouseenter>
+		<a-mouseleave target="#glow8" opacity=".2"></a-mouseleave>
+      </a-curvedimage>
+      
+      <a-curvedimage id="glow8" src="glow.png" rotation="0 1.5 0" radius="5.7" theta-length="38" height="1.1" position="0 .67 0" scale=".5 .5 .5"  opacity=".2">
+	      <a-animation attribute="rotation" from="0 1.5 0" to="0 -358.5 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	  </a-curvedimage>
+      </a-entity>  -->
+      
+      <!-- Duderstadt Gallery Button -->
+      <!--<a-entity rotation="0 -320 0">
+      <a-curvedimage id="duderbutton" src="duderthumb.png" radius="5.7" theta-length="35" height=".85" position="0 0.85 0" scale=".4 .4 .4"  opacity=".8">
+        <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	    <a-mouseenter target="#glow9" opacity="1"></a-mouseenter>
+		<a-mouseleave target="#glow9" opacity=".2"></a-mouseleave>
+      </a-curvedimage>
+      
+      <a-curvedimage id="glow9" src="glow.png" rotation="0 1.5 0" radius="5.7" theta-length="38" height="1.1" position="0 .67 0" scale=".5 .5 .5"  opacity=".2">
+	      <a-animation attribute="rotation" from="0 1.5 0" to="0 -358.5 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+	  </a-curvedimage>
+      </a-entity>  -->-->
+
+      
+
+
+<!--
+<a-entity>
+        <a-cylinder position="0 .3 0" radius="4" height="1" side="back" open-ended="true" color="#000000" opacity=".45"></a-cylinder>
+      </a-entity>
+-->
+      
+      <!--
+<a-light type="directional" color="#fff" intensity="0.2" position="-1 2 1"></a-light>
+      <a-light type="ambient" color="#fff"></a-light>
+-->
 
     </a-scene>
-
-</body>
+  </body>
+  
+    <script type="text/javascript">
+    document.body.style.cursor = 'none';
+</script>
+  
+    <script>
+        
+    
+    var FarnBedroomsky = document.querySelector('#FarnBedroom');
+    var FarnDiningsky = document.querySelector('#FarnDining');
+    var FarnFiresky = document.querySelector('#FarnFire');
+    var FarnPorchsky = document.querySelector('#FarnPorch');
+    var FarnSinksky = document.querySelector('#FarnSink');
+    var FarnStairssky = document.querySelector('#FarnStairs');
+    // var couchessky = document.querySelector('#couches');
+    // var printstudsky = document.querySelector('#printstud');
+    // var dudersky = document.querySelector('#duder');
+    
+    document.querySelector('#FarnBedroombutton').addEventListener('click', function() {
+      FarnBedroomsky.setAttribute('visible', 'true');
+      FarnDiningsky.setAttribute('visible', 'false');
+      FarnFiresky.setAttribute('visible', 'false');
+      FarnPorchsky.setAttribute('visible', 'false');
+      FarnSinksky.setAttribute('visible', 'false');
+      FarnStairssky.setAttribute('visible', 'false');
+      couchessky.setAttribute('visible', 'false');
+      printstudsky.setAttribute('visible', 'false');
+      dudersky.setAttribute('visible', 'false');
+    });
+    
+    document.querySelector('#FarnDiningbutton').addEventListener('click', function() {
+      FarnBedroomsky.setAttribute('visible', 'false');
+      FarnDiningsky.setAttribute('visible', 'true');
+      FarnFiresky.setAttribute('visible', 'false');
+      FarnPorchsky.setAttribute('visible', 'false');
+      FarnSinksky.setAttribute('visible', 'false');
+      FarnStairssky.setAttribute('visible', 'false');
+      couchessky.setAttribute('visible', 'false');
+      printstudsky.setAttribute('visible', 'false');
+      dudersky.setAttribute('visible', 'false');
+    });
+    
+    document.querySelector('#FarnFirebutton').addEventListener('click', function() {
+      FarnBedroomsky.setAttribute('visible', 'false');
+      FarnDiningsky.setAttribute('visible', 'false');
+      FarnFiresky.setAttribute('visible', 'true');
+      FarnPorchsky.setAttribute('visible', 'false');
+      FarnSinksky.setAttribute('visible', 'false');
+      FarnStairssky.setAttribute('visible', 'false');
+      couchessky.setAttribute('visible', 'false');
+      printstudsky.setAttribute('visible', 'false');
+      dudersky.setAttribute('visible', 'false');
+    });
+    
+    document.querySelector('#FarnPorchbutton').addEventListener('click', function() {
+      FarnBedroomsky.setAttribute('visible', 'false');
+      FarnDiningsky.setAttribute('visible', 'false');
+      FarnFiresky.setAttribute('visible', 'false');
+      FarnPorchsky.setAttribute('visible', 'true');
+      FarnSinksky.setAttribute('visible', 'false');
+      FarnStairssky.setAttribute('visible', 'false');
+      couchessky.setAttribute('visible', 'false');
+      printstudsky.setAttribute('visible', 'false');
+      dudersky.setAttribute('visible', 'false');
+    });
+    
+    document.querySelector('#FarnSinkbutton').addEventListener('click', function() {
+      FarnBedroomsky.setAttribute('visible', 'false');
+      FarnDiningsky.setAttribute('visible', 'false');
+      FarnFiresky.setAttribute('visible', 'false');
+      FarnPorchsky.setAttribute('visible', 'false');
+      FarnSinksky.setAttribute('visible', 'true');
+      FarnStairssky.setAttribute('visible', 'false');
+      couchessky.setAttribute('visible', 'false');
+      printstudsky.setAttribute('visible', 'false');
+      dudersky.setAttribute('visible', 'false');
+    });
+    
+    document.querySelector('#FarnStairsbutton').addEventListener('click', function() {
+      FarnBedroomsky.setAttribute('visible', 'false');
+      FarnDiningsky.setAttribute('visible', 'false');
+      FarnFiresky.setAttribute('visible', 'false');
+      FarnPorchsky.setAttribute('visible', 'false');
+      FarnSinksky.setAttribute('visible', 'false');
+      FarnStairssky.setAttribute('visible', 'true');
+      couchessky.setAttribute('visible', 'false');
+      printstudsky.setAttribute('visible', 'false');
+      dudersky.setAttribute('visible', 'false');
+    });
+    
+    // document.querySelector('#couchesbutton').addEventListener('click', function() {
+    //   FarnBedroomsky.setAttribute('visible', 'false');
+    //   FarnDiningsky.setAttribute('visible', 'false');
+    //   FarnFiresky.setAttribute('visible', 'false');
+    //   FarnPorchsky.setAttribute('visible', 'false');
+    //   FarnSinksky.setAttribute('visible', 'false');
+    //   FarnStairssky.setAttribute('visible', 'false');
+    //   couchessky.setAttribute('visible', 'true');
+    //   printstudsky.setAttribute('visible', 'false');
+    //   dudersky.setAttribute('visible', 'false');
+    // });
+    
+    // document.querySelector('#printstudbutton').addEventListener('click', function() {
+    //   FarnBedroomsky.setAttribute('visible', 'false');
+    //   FarnDiningsky.setAttribute('visible', 'false');
+    //   FarnFiresky.setAttribute('visible', 'false');
+    //   FarnPorchsky.setAttribute('visible', 'false');
+    //   FarnSinksky.setAttribute('visible', 'false');
+    //   FarnStairssky.setAttribute('visible', 'false');
+    //   couchessky.setAttribute('visible', 'false');
+    //   printstudsky.setAttribute('visible', 'true');
+    //   dudersky.setAttribute('visible', 'false');
+    // });
+    
+    // document.querySelector('#duderbutton').addEventListener('click', function() {
+    //   FarnBedroomsky.setAttribute('visible', 'false');
+    //   FarnDiningsky.setAttribute('visible', 'false');
+    //   FarnFiresky.setAttribute('visible', 'false');
+    //   FarnPorchsky.setAttribute('visible', 'false');
+    //   FarnSinksky.setAttribute('visible', 'false');
+    //   FarnStairssky.setAttribute('visible', 'false');
+    //   couchessky.setAttribute('visible', 'false');
+    //   printstudsky.setAttribute('visible', 'false');
+    //   dudersky.setAttribute('visible', 'true');
+    // });
+    
+    
+  </script>
+  
 </html>
-
